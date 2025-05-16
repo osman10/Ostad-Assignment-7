@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Project-3: Temperature Converter</title>
+    <style>
+
+    .converter {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      width: 500px;
+      margin: 0 auto;
+    }
+
+    .converter h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .converter input, .converter select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .converter button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .converter button:hover {
+      background: #0056b3;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="container-fluid shadow-sm">
+      <div class="container p-3 mb-5 bg-body rounded mx-auto">
+        <h1 class="text-center text-uppercase fs-1 fw-bold text-warning">
+          Ostad Assignment-7
+        </h1>
+        <p class="text-center text-info fs-3">
+          <b>Project Name : </b> Temperature converter
+        </p>
+      </div>
+    </div>
+
+    <!-- code start here -->
+    <div class="converter">
+      <h2>Temperature Converter</h2>
+
+      <input type="number" id="inputTemp" placeholder="Enter temperature" />
+
+      <select id="fromUnit">
+        <option value="celsius">Celsius (°C)</option>
+        <option value="fahrenheit">Fahrenheit (°F)</option>
+        <option value="kelvin">Kelvin (K)</option>
+      </select>
+
+      <select id="toUnit">
+        <option value="celsius">Celsius (°C)</option>
+        <option value="fahrenheit">Fahrenheit (°F)</option>
+        <option value="kelvin">Kelvin (K)</option>
+      </select>
+
+      <button onclick="convertTemperature()">Convert</button>
+
+      <div class="result" id="result">Result: --</div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+
+
+
+    <script>
+      function convertTemperature() {
+        const temp = parseFloat(document.getElementById("inputTemp").value);
+        const fromUnit = document.getElementById("fromUnit").value;
+        const toUnit = document.getElementById("toUnit").value;
+
+        if (isNaN(temp)) {
+          document.getElementById("result").innerText =
+            "Please enter a valid number.";
+          return;
+        }
+
+        let celsius;
+
+        //ইনপুর যাই থাক তা আগে সেলসিয়াসে কনর্ভাট করতে হবে 
+          switch (fromUnit) {
+          case "celsius":
+            celsius = temp;
+            break;
+          case "fahrenheit":
+            celsius = ((temp - 32) * 5) / 9;
+            break;
+          case "kelvin":
+            celsius = temp - 273.15;
+            break;
+        }
+
+        let convertedTemp;
+
+        // সেলসিয়াস ইনপুটের উপর ভিত্তি করে টার্গেট ইনপুটে কনর্ভার্ট করতে হবে
+        switch (toUnit) {
+          case "celsius":
+            convertedTemp = celsius;
+            break;
+          case "fahrenheit":
+            convertedTemp = (celsius * 9) / 5 + 32;
+            break;
+          case "kelvin":
+            convertedTemp = celsius + 273.15;
+            break;
+        }
+
+        document.getElementById(
+          "result"
+        ).innerText = `Result: ${convertedTemp.toFixed(2)} °${toUnit
+          .charAt(0)
+          .toUpperCase()}`;
+      }
+    </script>
+  </body>
+</html>

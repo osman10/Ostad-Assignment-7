@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Project-1: Stopwatch</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: sans-serif;
+        text-align: center;
+      }
+      #stopwatch {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+      button {
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid shadow-sm">
+      <div class="container p-3 mb-5 bg-body rounded">
+        <h1 class="text-center text-uppercase fs-1 fw-bold text-warning">
+          Ostad Assignment-7
+        </h1>
+        <p class="text-center text-info fs-3">
+          <b>Project Name : </b> Stopwatch
+        </p>
+      </div>
+    </div>
+
+    <!-- project start here -->
+    <div class="container">
+      <div id="stopwatch">00:00:00</div>
+      <button class="btn-success" onclick="startStopwatch()">Start</button>
+      <button class="btn-danger" onclick="stopStopwatch()">Stop</button>
+      <button class="btn-warning" onclick="resetStopwatch()">Reset</button>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let startTime, interval;
+      let elapsed = 0;
+      let running = false;
+
+      function updateDisplay() {
+        let time = elapsed;
+        if (running) {
+          time += Date.now() - startTime;
+        }
+        const hours = Math.floor(time / 3600000);
+        const minutes = Math.floor((time % 3600000) / 60000);
+        const seconds = Math.floor((time % 60000) / 1000);
+
+        document.getElementById("stopwatch").textContent = `${String(
+          hours
+        ).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(
+          seconds
+        ).padStart(2, "0")}`;
+      }
+
+      function startStopwatch() {
+        if (!running) {
+          startTime = Date.now();
+          interval = setInterval(updateDisplay, 250);
+          running = true;
+        }
+      }
+
+      function stopStopwatch() {
+        if (running) {
+          elapsed += Date.now() - startTime;
+          clearInterval(interval);
+          running = false;
+        }
+      }
+
+      function resetStopwatch() {
+        clearInterval(interval);
+        elapsed = 0;
+        running = false;
+        updateDisplay();
+      }
+
+      updateDisplay(); // Initialize display
+    </script>
+  </body>
+</html>

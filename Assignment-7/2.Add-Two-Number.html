@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Project-2: Add two number</title>
+  </head>
+  <body>
+    <div class="container-fluid shadow-sm">
+      <div class="container p-3 mb-5 bg-body rounded">
+        <h1 class="text-center text-uppercase fs-1 fw-bold text-warning">
+          Ostad Assignment-7
+        </h1>
+        <p class="text-center text-info fs-3">
+          <b>Project Name : </b> Add two number
+        </p>
+      </div>
+    </div>
+
+    <!-- canculator start here -->
+    <div class="container">
+      <div class="d-flex flex-row justify-content-center">
+        <div class="calculator">
+          <input
+            class="border rounded p-3"
+            type="number"
+            id="num1"
+            placeholder="Number 1"
+          />
+          +
+          <input
+            class="border rounded p-3"
+            type="number"
+            id="num2"
+            placeholder="Number 2"
+          />
+          <br />
+          <button
+            style="width: 100%"
+            class="btn btn-primary mt-2 px-4 fs-5"
+            onclick="calculateSum()"
+          >
+            =
+          </button>
+          <button
+            style="width: 100%"
+            class="btn btn-danger mt-2 px-4 fs-5"
+            onclick="clearFields()"
+          >
+            C
+          </button>
+          <p class="text-center">Result: <span id="result">0</span></p>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      //  calculator function
+      function calculateSum() {
+        const n1 = parseFloat(document.getElementById("num1").value) || 0;
+        const n2 = parseFloat(document.getElementById("num2").value) || 0;
+        document.getElementById("result").innerText = n1 + n2;
+      }
+
+      function clearFields() {
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("result").innerText = "0";
+      }
+    </script>
+  </body>
+</html>

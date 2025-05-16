@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Project-5: BMI Calculator</title>
+  </head>
+  <body>
+    <div class="container-fluid shadow-sm">
+      <div class="container p-3 mb-5 bg-body rounded">
+        <h1 class="text-center text-uppercase fs-1 fw-bold text-warning">
+          Ostad Assignment-7
+        </h1>
+        <p class="text-center text-info fs-3"><b>Project Name : </b> BMI Calculator</p>
+      </div>
+    </div>
+
+    <!-- Code start here -->
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow-lg">
+            <div class="card-body">
+              <h3 class="card-title text-center mb-4">BMI Calculator</h3>
+
+              <form id="bmiForm">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="feet" class="form-label">Height (Feet)</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="feet"
+                      placeholder="e.g. 5"
+                      required
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="inches" class="form-label"
+                      >Height (Inches)</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="inches"
+                      placeholder="e.g. 8"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="weight" class="form-label">Weight (kg)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="weight"
+                    placeholder="e.g. 65"
+                    required
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                  Calculate BMI
+                </button>
+              </form>
+
+              <div class="mt-4 text-center">
+                <h4 id="bmiResult"></h4>
+                <p id="bmiMessage" class="fw-bold"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // Convert feet and inches to meters
+      function feetInchesToMeters(feet, inches) {
+        const totalInches = feet * 12 + inches;
+        return totalInches * 0.0254;
+      }
+
+      document
+        .getElementById("bmiForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const feet = parseFloat(document.getElementById("feet").value);
+          const inches = parseFloat(document.getElementById("inches").value);
+          const weight = parseFloat(document.getElementById("weight").value);
+          const bmiResult = document.getElementById("bmiResult");
+          const bmiMessage = document.getElementById("bmiMessage");
+
+          if (feet >= 0 && inches >= 0 && weight > 0) {
+            const heightInMeters = feetInchesToMeters(feet, inches);
+            const bmi = (weight / heightInMeters ** 2).toFixed(2);
+            bmiResult.textContent = `Your BMI is ${bmi}`;
+
+            // Category message
+            if (bmi < 18.5) {
+              bmiMessage.textContent = "Underweight";
+              bmiMessage.style.color = "#f39c12";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+              bmiMessage.textContent = "Normal weight";
+              bmiMessage.style.color = "#27ae60";
+            } else if (bmi >= 25 && bmi < 29.9) {
+              bmiMessage.textContent = "Overweight";
+              bmiMessage.style.color = "#e67e22";
+            } else {
+              bmiMessage.textContent = "Obese";
+              bmiMessage.style.color = "#c0392b";
+            }
+          } else {
+            bmiResult.textContent = "Please enter valid values!";
+            bmiMessage.textContent = "";
+          }
+        });
+    </script>
+  </body>
+</html>
